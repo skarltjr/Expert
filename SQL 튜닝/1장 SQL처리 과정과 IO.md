@@ -54,5 +54,7 @@ sql을 실행하기 전 최적화 과정은 다음과 같다.
 옵티마이저 또한 일종의 네비게이션이라고 생각하자
 최적의 경로를 제공해주는...
 ```
-- 여기서는 mysql을 사용하며 mysql 실행경로 미리보기가 가능하다.
+- 여기서는 mysql을 사용하며 explain 키워드를 통해 mysql 실행계획 미리보기가 가능하다.
+- <img width="779" alt="스크린샷 2023-01-02 오후 10 17 29" src="https://user-images.githubusercontent.com/62214428/210236603-6cc21d49-53d8-43d2-9f8c-bcebb2c1f37c.png">
+- <img width="1478" alt="스크린샷 2023-01-02 오후 10 17 16" src="https://user-images.githubusercontent.com/62214428/210236613-a14d6a62-8b22-4c41-96f7-46ee07c2aeef.png">
 
