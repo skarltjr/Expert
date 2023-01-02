@@ -72,3 +72,31 @@ pk는 기본적으로 인덱스가 걸린다
 &
 https://jeong-pro.tistory.com/243
 ```
+
+### 옵티마이저 힌트
+```
+네비게이션이 항상 옳은길만 찾아줄까?
+옵티마이저 또한 마찬가지다.
+
+이럴때 옵티마이저 힌트를 통해 의도적으로 데이터 액세스 경로를 변경할 수 있다.
+
+나아가 인덱스 a를 사용할게, 조인 방식이나 순서는 옵티마이저 너가 알아서해줘와 같이 
+일부만 지시할 수 있는데 이는 잘못된 결과를 만들어낼 수 있다.
+
+⭐️ 그러니 이왕에 힌트를 사용할거면 빈틈없이 기술하라고 한다.
+```
+```
+1번 = explain select * from car where carId = 3;
+
+create index c_maker on car(maker);
+
+show index from car;
+
+2번 = explain select /*+ INDEX(car c_maker) */ * from car where carId = 3; // 옵티마이저 힌트 적용하여 c_maker 인덱스 활용하도록
+```
+```
+실제로 
+1,2번의 rows 결과가 다르다 1번은 1/ 2번은 2
+즉 불필요한 인덱스 사용으로 악영향도 발생한다.
+```
+
