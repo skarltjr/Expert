@@ -57,4 +57,9 @@ sql을 실행하기 전 최적화 과정은 다음과 같다.
 - 여기서는 mysql을 사용하며 explain 키워드를 통해 mysql 실행계획 미리보기가 가능하다.
 - <img width="779" alt="스크린샷 2023-01-02 오후 10 17 29" src="https://user-images.githubusercontent.com/62214428/210236603-6cc21d49-53d8-43d2-9f8c-bcebb2c1f37c.png">
 - <img width="1478" alt="스크린샷 2023-01-02 오후 10 17 16" src="https://user-images.githubusercontent.com/62214428/210236613-a14d6a62-8b22-4c41-96f7-46ee07c2aeef.png">
-
+```
+sales left join car
+- 결국 sales는 type:all로 모든 컬럼 조회
+- car의 경우 pk로 조인하며 type:eq_ref로 
+   - 조인수행을 위해 각 테이블에서 하나의 행만이 읽혀지는 형태. const 타입 외에 가장 훌륭한 조인타입이다.
+```
