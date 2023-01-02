@@ -64,4 +64,11 @@ sales left join car
    - 조인수행을 위해 각 테이블에서 하나의 행만이 읽혀지는 형태. const 타입 외에 가장 훌륭한 조인타입이다.
 ```
 - 그런데 결과 산출을 위해 접근되는 rows가 1인게 아직 이해가 안된다....
-- 참고 : https://jeong-pro.tistory.com/243
+
+
+- 참고 : 
+```
+pk는 기본적으로 인덱스가 걸린다
+&
+https://jeong-pro.tistory.com/243
+```
