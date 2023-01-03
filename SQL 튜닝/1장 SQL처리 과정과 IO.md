@@ -191,5 +191,8 @@ preparedStatement는 statement를 상속받은 인터페이스로
 위 사진은 java statement를 상속한 preparedStatement를 impl한 JdbcPreparedStatement 생성자에
 브레이크 포인트를 걸고 왼쪽 쿼리를 실행했을때 걸리는지 확인한것이다.
 
+만들어진 sql은 다음과 같다.
+select product0_.product_id as product_1_0_, product0_.stock as stock2_0_, product0_.version as version3_0_ from products product0_ where product0_.product_id=?
+
 jpql에서 파라미터 바인딩또한 preparedStatement를 활용한다고 볼 수 있다.
 ```
