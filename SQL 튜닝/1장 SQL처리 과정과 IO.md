@@ -186,4 +186,10 @@ preparedStatement는 statement를 상속받은 인터페이스로
 라이브러리 캐시에 이를 캐싱해두고 재사용함으로써
 하드 파싱을 줄여 cpu 사용량을 줄이고 재사용한다.
 ```
+- <img width="1493" alt="스크린샷 2023-01-04 오전 12 22 17" src="https://user-images.githubusercontent.com/62214428/210387159-7c5c2333-1a9f-4fed-94a8-df1d811e0983.png">
+```
+위 사진은 java statement를 상속한 preparedStatement를 impl한 JdbcPreparedStatement 생성자에
+브레이크 포인트를 걸고 왼쪽 쿼리를 실행했을때 걸리는지 확인한것이다.
 
+jpql에서 파라미터 바인딩또한 preparedStatement를 활용한다고 볼 수 있다.
+```
