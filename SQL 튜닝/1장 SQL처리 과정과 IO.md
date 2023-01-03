@@ -117,7 +117,73 @@ show index from car;
 - cache miss로 sql 최적화를 진행해야 한다면 하드 파싱이다.
 - <img width="603" alt="스크린샷 2023-01-03 오후 10 33 01" src="https://user-images.githubusercontent.com/62214428/210367210-2560b40b-574c-4e44-98cc-01cb9ead5f3f.png">
 
-### 옵티마이저 힌트
-### 옵티마이저 힌트ㅇ
-### 옵티마이저 힌트유
-### 옵티마이저 힌트 
+```
+참고로 하드 파싱.
+즉 sql 최적화 과정은 dbms에서 몇안되는 cpu 집약적인 행위
+그러니 만약 라이브러리 캐시가 없다면 엄청난 트래픽이 몰렸을때
+db cpu 사용량이 터져버릴것... 그래서 라이브러리 캐시가 필요한데...
+
+아직 문제가 하나 있다.
+```
+
+### 바인드 변수의 중요성
+```
+사용자 정의 함수, 프로시저등은 이름이 있다.
+그러나.. sql은 이름이 없다.
+즉 sql 자체가 하나의 이름이다..
+
+이게 무슨 말인가?
+select  * from car;
+select * FROM car;
+SELECT * from car;
+
+위 3개 sql은 모두 서로 다른 쿼리다.
+```
+- 이 말은 서로 다른 sql을 모두 저장하거나
+- 모두 각각 캐싱해두면 오히려 그 양이 방대하여 역효과다.
+- 그래서 오라클이 sql을 영구 저장하지 않는쪽을 선택
+
+### 공유 가능 SQL
+```
+그럼 어떡해...?
+
+같은 sql같지만 이름이 없기에 서로 다른 sql이라 문제라고 했다.
+그래서 필요한 방법이 바인드 변수를 활용하는것
+
+즉 하나의 프로시저에서 파라미터만 달리하여 재사용한다.
+```
+```
+만약 아래와 같이 id만 다른 sql이 존재한다고 해보자
+
+select * from car where id=1;
+select * from car where id=2;
+select * from car where id=3;
+
+결국 모두 다른 sql이다.
+그런데 사실은 기능 자체는 동일하되 id만 서로 다르 값이니
+하나의 프로시저로 id(바인디 변수)만 달리한다면 
+sql은 하나만 저장하면 되지 않는가?
+```
+- 그럴때 사용되는것이 `바인드 변수`
+```
+select * from car where id = ?;
+```
+### 자바 진영의 preparedStatement
+```
+java 진영에서는 쿼리문을 사용할때 java.sql 패키지의 statement를 사용한다고 한다.
+```
+- <img width="793" alt="스크린샷 2023-01-03 오후 11 30 03" src="https://user-images.githubusercontent.com/62214428/210377294-852d136f-2e5b-4d0b-8726-d8b637910189.png">
+```
+preparedStatement는 statement를 상속받은 인터페이스로
+위 그림에서 parsing 결과를 캐싱해두고 나머지 3단계만 거쳐 sql로 변환해준다.
+```
+```
+우리가 jpql을 사용하며 select * from car where id = ?;
+위와 같은 sql에서 파라미터만 바꾸는 파라미터 바인딩 또한 preparedStatement를 사용한다
+```
+```
+결론적으로 공유 가능한 sql을 만들고
+라이브러리 캐시에 이를 캐싱해두고 재사용함으로써
+하드 파싱을 줄여 cpu 사용량을 줄이고 재사용한다.
+```
+
