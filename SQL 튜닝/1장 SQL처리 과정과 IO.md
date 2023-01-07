@@ -138,8 +138,17 @@ show index from car;
 ```
 실제로 
 1,2번의 rows 결과가 다르다 1번은 1/ 2번은 2
-즉 불필요한 인덱스 사용으로 악영향도 발생한다.
 ```
+
+```
+불필요한 인덱스 사용으로 악영향도 발생하는걸 직접확인해보자.
+아래 2번째 사진은 의도적으로 이상한 인덱스 만들어서 사용한것
+그 결과로 1003 row full scan
+```
+- <img width="1636" alt="스크린샷 2023-01-07 오후 11 25 10" src="https://user-images.githubusercontent.com/62214428/211155535-9dc63fc3-ac03-4e97-8d39-ff41693ad015.png">
+- <img width="1607" alt="스크린샷 2023-01-07 오후 11 26 22" src="https://user-images.githubusercontent.com/62214428/211155581-9033ed37-a35e-4577-ac04-bc3f36739c80.png">
+
+
 
 ## SQL 공유 및 재사용
 - <img width="646" alt="스크린샷 2023-01-03 오후 10 27 36" src="https://user-images.githubusercontent.com/62214428/210366493-801f9d31-4f68-4d85-a541-16d784ed5c0d.png">
