@@ -57,6 +57,7 @@ sql을 실행하기 전 최적화 과정은 다음과 같다.
 - 여기서는 mysql을 사용하며 explain 키워드를 통해 mysql 실행계획 미리보기가 가능하다.
 - <img width="779" alt="스크린샷 2023-01-02 오후 10 17 29" src="https://user-images.githubusercontent.com/62214428/210236603-6cc21d49-53d8-43d2-9f8c-bcebb2c1f37c.png">
 - <img width="1478" alt="스크린샷 2023-01-02 오후 10 17 16" src="https://user-images.githubusercontent.com/62214428/210236613-a14d6a62-8b22-4c41-96f7-46ee07c2aeef.png">
+
 ```
 sales left join car
 - 결국 sales는 type:all로 모든 컬럼 조회
@@ -64,6 +65,19 @@ sales left join car
    - 조인수행을 위해 각 테이블에서 하나의 행만이 읽혀지는 형태. const 타입 외에 가장 훌륭한 조인타입이다.
 ```
 - 그런데 결과 산출을 위해 접근되는 rows가 1인게 아직 이해가 안된다....
+```
+참고로 type 필드의 경우 공식 문서에 the join type이라고 나온다
+그런데 나는 개인적으로
+type은 접근 방식을 표시하는 필드다. 접근 방식은 테이블에서 어떻게 행데이터를 가져올것인가를 가리킨다
+라는 말이 더 와닿았다.
+아래 그림을 통해 생각해보자
+```
+- <img width="1260" alt="스크린샷 2023-01-07 오후 3 51 33" src="https://user-images.githubusercontent.com/62214428/211135375-7a65cd06-cf00-4cb3-93f2-f567b2460768.png">
+
+- <img width="1295" alt="스크린샷 2023-01-07 오후 3 51 57" src="https://user-images.githubusercontent.com/62214428/211135399-68904bf6-7bdf-4859-9ace-24cf77a9f212.png">
+
+- <img width="1343" alt="스크린샷 2023-01-07 오후 3 52 23" src="https://user-images.githubusercontent.com/62214428/211135389-efd8bc44-5c35-467e-9333-c23a03d93770.png">
+
 
 
 - 참고 : 
