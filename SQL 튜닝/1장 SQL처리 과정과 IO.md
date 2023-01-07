@@ -65,6 +65,33 @@ sales left join car
    - 조인수행을 위해 각 테이블에서 하나의 행만이 읽혀지는 형태. const 타입 외에 가장 훌륭한 조인타입이다.
 ```
 - 그런데 결과 산출을 위해 접근되는 rows가 1인게 아직 이해가 안된다....
+- 여기에 대한 대답은 바로. 예상치!!라서.. 
+- 데이터 1000개를 넣고 돌려보니 얼추 더 정확히 잘 나온다.
+```
+show create table car;
+select * from car;
+
+# 반복 insert 프로시저
+CREATE PROCEDURE loopInsert()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    WHILE i <= 1000
+        DO
+            INSERT INTO car(carId, carName, maker)
+            VALUES (null,concat('carName',concat(i)),concat('maker',concat(i)));
+            SET i = i + 1;
+        END WHILE;
+END;
+
+show procedure status ; # 프로시저 조회
+drop procedure loopInsert; # 프로시저 삭제
+call loopInsert(); # 프로시저 호출
+
+
+explain select * from car where carId>30;
+```
+- <img width="1651" alt="스크린샷 2023-01-07 오후 11 08 31" src="https://user-images.githubusercontent.com/62214428/211154875-8d9ca3b3-9bd1-4556-a9c8-5b7f4f69c29d.png">
+
 ```
 참고로 type 필드의 경우 공식 문서에 the join type이라고 나온다
 그런데 나는 개인적으로
